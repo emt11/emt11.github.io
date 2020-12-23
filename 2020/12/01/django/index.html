@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"emt11.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="环境搭建  虚拟环境的创建和使用  安装虚拟环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django框架">
+<meta property="og:url" content="https://emt11.github.io/2020/12/01/django/index.html">
+<meta property="og:site_name" content="夜奏花的博客">
+<meta property="og:description" content="环境搭建  虚拟环境的创建和使用  安装虚拟环境">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-01T14:29:43.000Z">
+<meta property="article:modified_time" content="2020-12-23T17:02:33.785Z">
+<meta property="article:author" content="emt">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://emt11.github.io/2020/12/01/django/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Django框架 | 夜奏花的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">夜奏花的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">3</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+
+
+ 
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://emt11.github.io/2020/12/01/django/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/wennai.jpg">
+      <meta itemprop="name" content="emt">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夜奏花的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Django框架
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-01 22:29:43" itemprop="dateCreated datePublished" datetime="2020-12-01T22:29:43+08:00">2020-12-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-24 01:02:33" itemprop="dateModified" datetime="2020-12-24T01:02:33+08:00">2020-12-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1></blockquote>
+<blockquote>
+<h2 id="虚拟环境的创建和使用"><a href="#虚拟环境的创建和使用" class="headerlink" title="虚拟环境的创建和使用"></a>虚拟环境的创建和使用</h2></blockquote>
+<ul>
+<li><p><strong>安装虚拟环境</strong></p>
+<a id="more"></a>
+
+<pre><code>  pip install virtualenv # 安装虚拟环境
+
+  pip install virtualenvwrapper # 安装虚拟环境扩展包</code></pre>
+</li>
+<li><p><strong>查找virtualenvwrapper.sh的位置</strong></p>
+<pre><code>  sudo find / -name virtualenvwrapper.sh</code></pre>
+</li>
+<li><p><strong>编辑家目录下的.bashrc文件,最后面添加下面两行代码(第二行source后面添加上一步查到的位置)</strong></p>
+<pre><code>  export WORKON_HOME=$HOME/.virtualenvs
+
+  source /home/heshilong/Downloads/anaconda3/bin/virtualenvwrapper.sh</code></pre>
+</li>
+<li><p><strong>使用source命令使.bashrc立即生效</strong></p>
+<pre><code>  source .bashrc</code></pre>
+</li>
+<li><p><strong>创建python3虚拟环境</strong></p>
+<pre><code>  mkvirtualenv -p python3 虚拟环境名</code></pre>
+</li>
+<li><p><strong>进入虚拟环境工作</strong></p>
+<pre><code>  workon 虚拟环境名</code></pre>
+</li>
+<li><p><strong>查看机器上有多少虚拟环境</strong></p>
+<pre><code>  workon 空格 两个tab键</code></pre>
+</li>
+<li><p><strong>退出虚拟环境</strong></p>
+<pre><code>  deactivate</code></pre>
+</li>
+<li><p><strong>删除虚拟环境</strong></p>
+<pre><code>  rmvirtualenv 虚拟环境名</code></pre>
+</li>
+<li><p><strong>虚拟环境下安装包</strong></p>
+<pre><code>  pip install 包名</code></pre>
+<p>  <em>注意: 不能使用sudo安装包,这会把包装到真实的主机环境</em></p>
+</li>
+<li><p><strong>安装Django环境</strong></p>
+<pre><code>  pip install django==1.8.2</code></pre>
+</li>
+</ul>
+<blockquote>
+<h2 id="Django项目和应用创建"><a href="#Django项目和应用创建" class="headerlink" title="Django项目和应用创建"></a>Django项目和应用创建</h2></blockquote>
+<ul>
+<li><p><strong>创建Django项目</strong></p>
+<pre><code>  django-admin startproject 项目名</code></pre>
+<p>  <em>注意:创建项目需进入虚拟环境,如果报错没找到django-admin命令,检查是否安装了Django环境</em></p>
+</li>
+<li><p><strong>Django应用简述</strong></p>
+<p>  Django项目可拆分为多个功能模块,每个功能模块通过一个应用来实现,应用目录下的文件功能如下:</p>
+<ol>
+<li><p>models.py: 模型,写和数据库相关的内容</p>
+</li>
+<li><p>views.py: 视图,接收请求,进行处理,与模型和模板交互,返回应答</p>
+</li>
+<li><p>admin.py: 网站后台管理相关文件</p>
+</li>
+</ol>
+</li>
+<li><p><strong>创建应用</strong></p>
+<pre><code>  python manage.py startapp 应用名</code></pre>
+<p>  <em>注意:创建应用需要进入项目目录</em></p>
+</li>
+<li><p><strong>应用注册</strong></p>
+<p>  建立项目与应用之间的联系,需要进行应用注册</p>
+<p>  修改setting.py中的INSTALL_APPS配置项,在其中添加创建的应用名</p>
+</li>
+<li><p><strong>运行开发web服务器</strong></p>
+<pre><code>  python manage.py runserver</code></pre>
+</li>
+</ul>
+<blockquote>
+<h1 id="Django的基本使用"><a href="#Django的基本使用" class="headerlink" title="Django的基本使用"></a>Django的基本使用</h1></blockquote>
+<blockquote>
+<h2 id="模型类设计和数据表的生成"><a href="#模型类设计和数据表的生成" class="headerlink" title="模型类设计和数据表的生成"></a>模型类设计和数据表的生成</h2></blockquote>
+<ul>
+<li><p><strong>模型类设计</strong></p>
+<ol>
+<li><p>在应用的models.py中设计模型类</p>
+</li>
+<li><p>所设计的类必须继承于models.Model类</p>
+</li>
+<li><p>models常用字段</p>
+<pre><code> models.CharField # 字符串字段
+
+ models.BooleanField # 布尔类型字段
+
+ models.DateField # 日期类型
+
+ models.FloatField # 十进制小数类型
+
+ models.IntegerField # 整形
+
+ models.BigIntegerField # 长整形</code></pre>
+</li>
+<li><p>例子:</p>
+<pre><code> class BookInfo(models.Model):
+
+     name = models.CharField(max_length=30)
+
+     price = models.IntegerField()
+
+     date = models.DateField()
+
+     author = models.ForeignKey(&#39;Author&#39;) # Author为关联类</code></pre>
+</li>
+</ol>
+</li>
+<li><p><strong>模型类生成数据表</strong></p>
+<pre><code>  python manage.py makemigrations # 生成迁移文件
+
+  python manage.py migrate # 生成迁移表</code></pre>
+</li>
+</ul>
+<blockquote>
+<h2 id="通过模型类操作数据表"><a href="#通过模型类操作数据表" class="headerlink" title="通过模型类操作数据表"></a>通过模型类操作数据表</h2></blockquote>
+<ul>
+<li><p><strong>进入项目shell环境</strong></p>
+<pre><code>  python manage.py shell</code></pre>
+</li>
+<li><p><strong>操作数据表</strong></p>
+<ol>
+<li><p>首先导入所需操作的类</p>
+<pre><code> from booktest.models import BookInfo,Author</code></pre>
+</li>
+<li><p>定义类对象</p>
+<pre><code> b = BookInfo()
+
+ a = Author()</code></pre>
+</li>
+<li><p>向表中插入数据</p>
+<pre><code> b.name = &#39;白夜行&#39;
+
+ b.price = 30
+
+ b.save() # 执行了save()方法才会存入数据表中
+
+ a.name = &#39;东野圭吾&#39;
+
+ a.save()</code></pre>
+</li>
+<li><p>查询数据</p>
+<pre><code> b = BookInfo.objects.get(name = &#39;白夜行&#39;)</code></pre>
+</li>
+<li><p>删除数据</p>
+<pre><code> b.delete()</code></pre>
+</li>
+<li><p>外键关联</p>
+<pre><code> b.author = a # 关联一个对象</code></pre>
+</li>
+<li><p>查询所有内容</p>
+<pre><code> BookInfo.objects.all()</code></pre>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h2 id="Django后台管理"><a href="#Django后台管理" class="headerlink" title="Django后台管理"></a>Django后台管理</h2></blockquote>
+<ul>
+<li><p><strong>本地化</strong></p>
+<p>  修改setting.py文件</p>
+<pre><code>      LANGUAGE_CODE = &#39;zh-hans&#39;# 使用中文
+
+      TIME_ZONE = &#39;Asia/Shanghai&#39;# 设置上海时间</code></pre>
+</li>
+<li><p><strong>新建管理员</strong></p>
+<pre><code>  python manage.py createsuperuser</code></pre>
+<p>  <em>如果报错:django.db.utils.OperationalError: no such table: auth_user,执行:python manage.py migrate</em></p>
+</li>
+<li><p><strong>注册模型类</strong></p>
+<p>  在admin.py中注册模型类</p>
+<pre><code>      admin.site.register(BookInfo)</code></pre>
+</li>
+<li><p><strong>自定义管理界面</strong></p>
+<p>  在admin.py中定义一个管理类,注册类时添加在后面</p>
+<pre><code>      class BookInfoAdmin(admin.ModelAdmin):
+
+          list_display = [&#39;id&#39;,&#39;name&#39;]
+
+      admin.site.register(BookInfo,BookInfoAdmin)</code></pre>
+</li>
+</ul>
+<blockquote>
+<h2 id="视图使用"><a href="#视图使用" class="headerlink" title="视图使用"></a><strong>视图使用</strong></h2></blockquote>
+<ul>
+<li><p><strong>视图</strong></p>
+<p>  在Django中,通过浏览器去请求一个页面时,使用视图函数来处理这个请求,视图函数处理之后,给浏览器返回页面内容</p>
+</li>
+<li><p><strong>视图函数的使用</strong></p>
+<p>  定义视图函数,视图函数定义在views.py中:</p>
+<pre><code>  def index(request):
+
+      #进行处理
+
+      return render(request,boottest.index)</code></pre>
+</li>
+<li><p><strong>url配置</strong></p>
+<p>  url配置的目的是让建立url和视图函数的对应关系.url配置定义在应用中urls.py的urlpatts的列表里,每一个配置项都调用url函数</p>
+<pre><code>  url(r&#39;^index&#39;,views.index)</code></pre>
+</li>
+<li><p><strong>url匹配的过程</strong></p>
+<p>  在项目的urls.py文件中包含具体应用的urls.py文件,应用的urls.py文件写url和视图函数对应关系</p>
+<pre><code>  url(r&#39;^&#39;,include(&#39;booktest.urls&#39;))</code></pre>
+</li>
+</ul>
+<blockquote>
+<h2 id="模板使用"><a href="#模板使用" class="headerlink" title="模板使用"></a>模板使用</h2></blockquote>
+<ul>
+<li><p><strong>模板文件的使用</strong></p>
+<ol>
+<li><p>在项目中创建一个模板文件夹templates,并在其中创建应用模板文件夹</p>
+<pre><code> mkdir templates
+
+ cd templates
+
+ mkdir booktest</code></pre>
+</li>
+<li><p>在项目setting.py的TEMPLATES中配置模板目录</p>
+<pre><code> &#39;DIRS&#39;:[os.path.join(BASE_DIR,&#39;templates&#39;)]</code></pre>
+</li>
+<li><p>使用模板文件</p>
+<p> a) 加载模板文件,去模板目录下面获取html文件内容,获得一个模板对象</p>
+<p> b) 定义模板上下文,向模板文件传递数据</p>
+<p> c) 模板渲染,得到一个标准的html内容</p>
+</li>
+</ol>
+</li>
+<li><p><strong>给模板文件传递数据</strong></p>
+<p>  模板变量使用:&#123;&#123;模板变量名&#125;&#125;</p>
+<p>  模板代码段:&#123;%代码段%&#125;</p>
+<p>  for循环-&#123;%for i in %&#125; &#123;% endfor %&#125;</p>
+</li>
+</ul>
+<blockquote>
+<h2 id="MVT综合案例"><a href="#MVT综合案例" class="headerlink" title="MVT综合案例"></a>MVT综合案例</h2></blockquote>
+<ul>
+<li><p><strong>编码之前的准备工作</strong></p>
+<ol>
+<li><p>设计出访问页面的url和对应视图的名字,确定视图函数的功能</p>
+</li>
+<li><p>设计模板文件的名字</p>
+</li>
+</ol>
+</li>
+<li><p><strong>MVT之间关联</strong></p>
+<ol>
+<li><p>url和视图</p>
+<p> url中把需要传递给视图的参数用()括起来,可在视图中接收</p>
+</li>
+<li><p>视图和模型</p>
+<p> 视图中可以导入相应模型的类,通过类来读取对应数据,并传给模板</p>
+</li>
+<li><p>视图和模板</p>
+<p> 视图给模板传送数据时,用字典来传送,传过去的数据模板中可直接使用</p>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1></blockquote>
+<blockquote>
+<h2 id="Django配置MySQL数据库"><a href="#Django配置MySQL数据库" class="headerlink" title="Django配置MySQL数据库"></a>Django配置MySQL数据库</h2></blockquote>
+<ul>
+<li><p><strong>Django配置使用MySQL数据库</strong></p>
+<p>  修改setting.py中的DATABASES</p>
+<pre><code>      DATABASES = &#123;
+
+          &#39;default&#39;:&#123;
+
+              &#39;ENGINE&#39;:&#39;django.db.backends.mysql&#39;, # 使用mysql数据库
+
+              &#39;NAME&#39;:&#39;booktest&#39;, # 填写使用库的名称
+
+              &#39;USER&#39;:&#39;Kiritsugu&#39;, # 填写mysql数据库的用户名
+
+              &#39;PASSWORD&#39;:&#39;h20000212&#39;, # 填写密码
+
+              &#39;HOST&#39;:&#39;localhost&#39;, # 填写数据库所在主机
+
+              &#39;PORT&#39;:&#39;3306&#39;, # 数据库所用端口
+
+          &#125;
+      &#125;</code></pre>
+<p>  <em>注意:Django框架不会自动帮我们生成对应库,要我们自己创建</em></p>
+</li>
+<li><p><strong>切换MySQL之后不能启动服务器</strong></p>
+<ol>
+<li><p>安装pymysql模块</p>
+<pre><code> pip3 install pymysql</code></pre>
+</li>
+<li><p>配置–init–.py文件</p>
+<pre><code> import pymysql
+
+ pymysql.install_as_MySQLdb()</code></pre>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h2 id="页面重定向"><a href="#页面重定向" class="headerlink" title="页面重定向"></a>页面重定向</h2></blockquote>
+<ul>
+<li><p><strong>页面重定向</strong></p>
+<p>  服务器不返回页面,而是告诉浏览器再去请求其他url地址,设置在views.py中</p>
+<pre><code>      from django.shortcuts import render,redirect
+
+      def create(request):
+
+          pass
+
+          return redirect(&#39;/index&#39;)</code></pre>
+</li>
+</ul>
+<blockquote>
+<h2 id="字段属性和选项"><a href="#字段属性和选项" class="headerlink" title="字段属性和选项"></a>字段属性和选项</h2></blockquote>
+<ul>
+<li><p><strong>模型类属性命名限制</strong></p>
+<ol>
+<li><p>不能是python的保留关键字</p>
+</li>
+<li><p>不允许使用连续的下划线,这是由Django的查询方式决定的</p>
+</li>
+<li><p>定义属性时,需要指定字段类型,通过字段类型的参数指定选项,语法如下:</p>
+<p> 属性名 = models.字段类型(选项)</p>
+</li>
+</ol>
+</li>
+<li><p><strong>字段类型</strong></p>
+<p>  使用时需要引入django.db.models包,字段类型如下:</p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">AutoField</td>
+<td align="center">自动增长的IntegerField,通常不用指定,不指定时Django会自动创建名为id的自动增长属性</td>
+</tr>
+<tr>
+<td align="center">BooleanField</td>
+<td align="center">布尔字段,值为True或者False</td>
+</tr>
+<tr>
+<td align="center">NullBooleanField</td>
+<td align="center">支持Null,True,False三种值</td>
+</tr>
+<tr>
+<td align="center">CharField(max_length=最大长度)</td>
+<td align="center">字符串,参数max_length表示最大字符个数</td>
+</tr>
+<tr>
+<td align="center">TextField</td>
+<td align="center">大文本字段,一般超过4000个字</td>
+</tr>
+<tr>
+<td align="center">IntegerField</td>
+<td align="center">整数</td>
+</tr>
+<tr>
+<td align="center">DecimalField(max_digits=None,decimal_places=None)</td>
+<td align="center">十进制浮点数,参数max_digits表示总位数,参数decimal_places表示小数位数</td>
+</tr>
+<tr>
+<td align="center">FloatField</td>
+<td align="center">浮点数,参数同上,输入和输出的数据可能有微小差别</td>
+</tr>
+<tr>
+<td align="center">DateField(auto_now=False,auto_now_add=False)</td>
+<td align="center">日期,(1)参数auto_now表示每次保存对象时,自动设置该字段为当前时间,用于”最后一次修改”的时间戳,它总是使用当前日期,默认为False.(2)参数auto_now_add表示当对象第一次被创建时自动设置当前时间,用于创建的时间戳,它总是使用当前日期,默认为False.(3)以上两个参数相互排斥,只能设置一个</td>
+</tr>
+<tr>
+<td align="center">TimeField</td>
+<td align="center">时间,参数同DateField</td>
+</tr>
+<tr>
+<td align="center">DateTimeField</td>
+<td align="center">日期时间,参数同DateField</td>
+</tr>
+<tr>
+<td align="center">FileField</td>
+<td align="center">上传文件字段</td>
+</tr>
+<tr>
+<td align="center">ImageField</td>
+<td align="center">继承于FileField,对上传的内容进行校验,确保是有效的图片</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>字段选项</strong></p>
+<p>  通过选项实现对字段的约束,选项如下:</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项名</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">default</td>
+<td align="center">默认值,设置默认值</td>
+</tr>
+<tr>
+<td align="center">primary_key</td>
+<td align="center">若为True,则该字段成为模型的主键,默认值是False,一般作为AutoField的选项使用</td>
+</tr>
+<tr>
+<td align="center">unique</td>
+<td align="center">如果为True,这个字段在表中必须有唯一值,默认值是False</td>
+</tr>
+<tr>
+<td align="center">db_index</td>
+<td align="center">若值为True,则在表中会为该字段创建索引,默认值是False</td>
+</tr>
+<tr>
+<td align="center">db_column</td>
+<td align="center">字段的名称,如果未指定,则使用属性的名称</td>
+</tr>
+<tr>
+<td align="center">null</td>
+<td align="center">如果为True,表示允许为空,默认值是False</td>
+</tr>
+<tr>
+<td align="center">blank</td>
+<td align="center">如果为True,则该字段允许为空白,默认值是False</td>
+</tr>
+</tbody></table>
+<p>  <em>对比:    null是数据库范畴的概念,blank是后台管理页面表单验证范畴的</em><br>  <em>经验:    当修改模型类之后,如果添加的选项不影响表的结构,则不需要重新做迁移,default和blank不影响表结构</em></p>
+</li>
+</ul>
+<blockquote>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2></blockquote>
+<ul>
+<li><p><strong>开启MySQL的查询日志</strong></p>
+<p>  让其产生mysql.log,里面记录的对MySQL数据库操作记录</p>
+<p>  <em>注: 大型项目不建议开启,会产生大量数据</em></p>
+<ol>
+<li><p>打开MySQL的配置文件,去除其中两行的注释(deepin系统下)</p>
+<pre><code> sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
+
+ general_log_file = /var/log/mysql/mysql.log
+
+ general_log = 1</code></pre>
+</li>
+<li><p>实时查看MySQL的日志文件</p>
+<pre><code> sudo tail -f /var/log/mysql/mysql.log</code></pre>
+</li>
+</ol>
+</li>
+<li><p><strong>查询函数</strong></p>
+<p>  通过模型类.objects属性可以调用如下函数,实现对模型类应用的数据表的查询</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+<th>返回值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>get</td>
+<td>返回表中满足条件的一条且只能有一条数据</td>
+<td>一个模型对象</td>
+<td>参数中写查询条件,如果查到多条则抛出MultipleObjectsReturned,查不到抛出DoesNotExist</td>
+</tr>
+<tr>
+<td>all</td>
+<td>返回模型类对应表格中的所有数据</td>
+<td>QuerySet</td>
+<td>查询集</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>返回满足条件的数据</td>
+<td>QuerySet</td>
+<td>参数写查询条件</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td>返回不满足条件的数据</td>
+<td>QuerySet</td>
+<td>参数写查询条件</td>
+</tr>
+<tr>
+<td>order_by</td>
+<td>对查询结果排序</td>
+<td>QuerySet</td>
+<td>参数中写根据哪些字段进行排序</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><strong>F对象</strong></p>
+<p>  作用: 用于类属性之间的比较</p>
+<p>  使用前需要导入模块</p>
+<pre><code>      from django.db.models import F</code></pre>
+<p>  例:查询图书阅读量大圩评论量的图书信息</p>
+<pre><code>      BookInfo.objects.filter(read__gt=F(&#39;comment&#39;))</code></pre>
+</li>
+<li><p><strong>Q对象</strong></p>
+<p>  作用: 用于查询条件之间的逻辑关系.not and or.可以对Q对象进行&amp; | ~操作</p>
+<p>  使用前需要导入模块</p>
+<pre><code>      from django.db.models import Q</code></pre>
+<p>  例:查询id大于3或者阅读量大于30的图书的信息</p>
+<pre><code>      BookInfo.objects.filter(Q(id__gt=3)&amp;Q(read__gt=30))</code></pre>
+</li>
+<li><p><strong>聚合函数</strong></p>
+<p>  作用: 对查询结果进行聚合操作</p>
+<p>  sum count avg max min</p>
+<p>  aggregate:调用这个函数来使用聚合.返回值是一个字典</p>
+<p>  使用前导入聚合类</p>
+<pre><code>      from django.db.models import Sum,Count,Mac,Min,Avg</code></pre>
+<p>  例:查询所有图书的数目</p>
+<pre><code>      BookInfo.objects.all().aggregate(Count(&#39;id&#39;))
+      # &#123;&#39;id_count&#39;:5&#125;</code></pre>
+</li>
+<li><p><strong>查询集</strong></p>
+<p>  all,filter,exclude,order_by调用这些函数会产生一个查询集QuerySet</p>
+<p>  QuerySet类对象可以继续调用上面的所有函数</p>
+<p>  查询集特征:</p>
+<p>  1.惰性查询: 只有实际使用查询集中的数据的时候才会发生对数据库的真正查询</p>
+<p>  2.缓存: 当使用的是同一个查询集时,第一次的时候会发生实际数据库的查询,然后把结果缓存起来,之后再使用这个查询集时,使用的是缓存中的结果</p>
+<p>  限制查询集:</p>
+<p>  1.可以对一个查询集进行取下标或者切片操作来限制查询集的结果</p>
+<p>  2.对一个查询集进行切片操作会产生一个新的查询集,下标不允许为负数</p>
+<p>  3.取出查询集第一条数据的两种方法:</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>b[0]</td>
+<td>如果结果不存在,会抛出IndexError异常</td>
+</tr>
+<tr>
+<td>b[0:1].get()</td>
+<td>如果结果不存在,会抛出DoesNotExist异常</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<blockquote>
+<h2 id="模型关系及相关操作"><a href="#模型关系及相关操作" class="headerlink" title="模型关系及相关操作"></a>模型关系及相关操作</h2></blockquote>
+<ul>
+<li><p><strong>模型类关系</strong></p>
+<ol>
+<li><p>一对多关系</p>
+<p> 例: 图书类-英雄类</p>
+<pre><code> models.ForeignKey() 定义在多的类中</code></pre>
+</li>
+<li><p>多对多关系</p>
+<p> 例: 新闻类-新闻类型类 体育新闻 国际类新闻</p>
+<pre><code> models.ManyToManyField() 定义在哪个类都可以</code></pre>
+</li>
+<li><p>一对一关系</p>
+<p> 例: 员工基本信息类-员工详细信息类</p>
+<pre><code> models.OneToOneField() 定义在哪个类都可以</code></pre>
+</li>
+</ol>
+</li>
+<li><p><strong>关联查询</strong>(一对多)</p>
+<p>  在一对多关系中,一对应的类我们把它叫做一类,多对应的那个类我们把它叫做多类,我们把多类中定义的建立关联的类属性叫做关联属性</p>
+<ol>
+<li><p>通过对象关联查询</p>
+<p> 由多类的对象查询一类的对象:多类的对象.关联属性</p>
+<p> 有一类的对象查询多类的对象:一类的对象.多类名_set.all()</p>
+</li>
+<li><p>通过类关联查询</p>
+<p> 由一类查询多类的对象: 多类名.objects.filter(关联属性__一类属性名__条件名)</p>
+<p> 由多类查询一类的对象: 一类名.objects.filter(多类名小写__多类属性名__条件名)</p>
+</li>
+</ol>
+</li>
+<li><p><strong>插入,更新和删除</strong></p>
+<p>  调用一个模型类对象的save()方法可以实现数据表数据的插入和更新</p>
+<p>  调用一个模型类的delete()方法可以实现数据表数据的删除</p>
+</li>
+</ul>
+<blockquote>
+<h2 id="管理器"><a href="#管理器" class="headerlink" title="管理器"></a>管理器</h2></blockquote>
+<p>BookInfo.objects.all()中的objects是Django帮我们自动生成的管理器对象,通过这个管理器可以实现对数据的查询</p>
+<p>objects是models.Manger类的一个对象.自定义管理器之后Django就不再帮我们自动生成objects管理器</p>
+<ul>
+<li><p><strong>自定义管理器</strong></p>
+<ol>
+<li><p>继承于model.Manger类</p>
+</li>
+<li><p>手动在具体类的模型中定义一个自定义管理器的对象,通过这个对象查询数据</p>
+</li>
+</ol>
+</li>
+<li><p><strong>自定义管理器的应用场景</strong></p>
+<ol>
+<li><p>改变查询的结果集,比如调用BookInfo.books.all()返回的是没有删除的图书的数据</p>
+<pre><code> Class NewManager(models.Manager):
+
+     def all(self):
+
+         books = super.all()
+
+         books = books.filter(isDelete=False)
+
+         return books;</code></pre>
+</li>
+<li><p>添加额外的方法</p>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h2 id="元选项"><a href="#元选项" class="headerlink" title="元选项"></a>元选项</h2></blockquote>
+<p>Django默认生成的表名:应用名小写_模型类名</p>
+<p>元选项: 需要在模型类中定义一个元类Meat,在里面定义一个类属性db_table就可以指定表名</p>
+<blockquote>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1></blockquote>
+<blockquote>
+<h2 id="视图功能"><a href="#视图功能" class="headerlink" title="视图功能"></a>视图功能</h2></blockquote>
+<p>接收请求,进行处理,与M和T交互,返回应答.</p>
+<p>返回html内容HttpResponse,也可以重定向redirect,还可能是JsonResponse</p>
+<blockquote>
+<h2 id="视图函数的使用及url配置"><a href="#视图函数的使用及url配置" class="headerlink" title="视图函数的使用及url配置"></a>视图函数的使用及url配置</h2></blockquote>
+<ul>
+<li><p><strong>使用</strong></p>
+<ol>
+<li><p>使用视图函数</p>
+<p> request参数必须有,是一个HttpRequest类型的对象,参数名可以变化,但不要更改</p>
+</li>
+<li><p>配置url</p>
+<p> 建立url和视图函数之间的对应关系</p>
+</li>
+</ol>
+</li>
+<li><p><strong>url配置的过程</strong></p>
+<ol>
+<li><p>在项目的urls文件中包含具体应用的urls文件,在具体应用的urls文件中包含具体url和视图的对应关系</p>
+</li>
+<li><p>url配置项是定义在urlpatterns的列表中,其中的每一个元素就是一个配置项,每一个配置项都调用url函数</p>
+</li>
+</ol>
+</li>
+<li><p><strong>url匹配的过程</strong></p>
+<p>  url:<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/aindex?a=1">http://127.0.0.1:8000/aindex?a=1</a></p>
+<ol>
+<li><p>去除域名和后面的参数,剩下的/aindex,再把前面的/去掉,剩下aindex</p>
+</li>
+<li><p>拿aindex先到项目的urls.py文件中进行从上到下的匹配,匹配成功之后执行后面对应的处理动作,就是把匹配成功的部分a字符去除,然后拿剩下的部分index到应用的urls.py文件中再进行从上到下的匹配</p>
+</li>
+<li><p>如果匹配成功则调用相应的视图函数,产生内容返回给客户端,如果匹配失败则产生404错误</p>
+</li>
+</ol>
+</li>
+<li><p><strong>捕获url参数</strong></p>
+<p>  进行url匹配时,把所需要捕获的部分设置成一个正则表达式组,这样Django框架就会自动把匹配成功后相应组的内容作为参数传递给视图函数</p>
+</li>
+</ul>
+<blockquote>
+<h2 id="错误视图"><a href="#错误视图" class="headerlink" title="错误视图"></a>错误视图</h2></blockquote>
+<ul>
+<li><p><strong>404</strong></p>
+<p>  找不到页面,关闭调试模式之后,默认会显示一个标准的错误页面,如果要显示自定义的页面,则需要到templates目录下面自定义一个404.html文件</p>
+<ol>
+<li><p>url没有配置</p>
+</li>
+<li><p>url配置错误</p>
+</li>
+</ol>
+</li>
+<li><p><strong>500</strong></p>
+<p>  服务器端的错误</p>
+<ol>
+<li>视图出错</li>
+</ol>
+</li>
+<li><p><strong>调试模式</strong></p>
+<p>  网站开发完成时需要关闭调试模式,在setting.py文件中:</p>
+<pre><code>      DEBUT=False
+
+      ALLOWED_HOST=[&#39;*&#39;]</code></pre>
+</li>
+</ul>
+<blockquote>
+<h2 id="表单提交"><a href="#表单提交" class="headerlink" title="表单提交"></a>表单提交</h2></blockquote>
+<ul>
+<li><p><strong>post提交</strong></p>
+<p>  返回给函数的值在请求头中,对应视图接收到后可调用request.POST.get(‘属性名’)来获取相应属性的值,一般用于密码等敏感信息</p>
+</li>
+<li><p><strong>get提交</strong></p>
+<p>  返回给函数的值在url中,对应视图接收到后可调用request.GET.get(‘属性名’)来获取相应属性的值,一般用于不敏感信息</p>
+</li>
+</ul>
+<blockquote>
+<h2 id="ajax请求"><a href="#ajax请求" class="headerlink" title="ajax请求"></a>ajax请求</h2></blockquote>
+<p>在不重新加载当前页面的情况下,在后台访问其他页面,局部刷新当前页面</p>
+<ul>
+<li><p><strong>使用js等静态文件</strong></p>
+<ol>
+<li><p>在项目的文件夹下创建一个静态文件目录static,目录下存放js,css,image等静态文件夹,里面存放相应静态文件</p>
+</li>
+<li><p>STASTICFILES_DIRS = [os.path.join(BASE_DIR, ‘stastic’)]</p>
+</li>
+</ol>
+</li>
+<li><p><strong>通过点击触发ajax</strong></p>
+<pre><code>      &lt;script&gt;
+
+          $(function()&#123;
+
+              $(&#39;#div1&#39;).click(function()&#123;
+
+                  $.ajax(&#123;
+
+                      &#39;url&#39;:&#39;/index&#39;, //要后台访问的地址
+
+                      &#39;type&#39;:&#39;post&#39;, //传参的方法类型
+
+                      &#39;data&#39;:&#123;&#39;user&#39;:$(&#39;#i1&#39;).val(),&#39;password&#39;:$(&#39;#i2&#39;).val()&#125;, //要传递的参数
+
+                      &#39;dataType&#39;:&#39;json&#39;, //接收参数的方法类型
+
+                      success:function(data)&#123;&#125;,//收到访问地址传来的数据data成功后,执行的函数
+                  &#125;)
+
+              &#125;)
+
+          &#125;)
+
+      &lt;/script&gt;</code></pre>
+</li>
+<li><p><strong>后台访问的页面返回数据给ajax</strong></p>
+<pre><code>  from django.http import JsonResponse
+
+  def ajax_test(request):
+
+      return JsonResponse(&#123;&#39;test&#39;:1,&#39;test2&#39;:2&#125;)</code></pre>
+</li>
+<li><p><strong>ajax同步异步</strong></p>
+<p>  默认为异步,不等待回调,设置同步,等待回调</p>
+<pre><code>  &#39;async&#39;:false, //设置同步</code></pre>
+</li>
+</ul>
+<blockquote>
+<h1 id="cookie与session"><a href="#cookie与session" class="headerlink" title="cookie与session"></a>cookie与session</h1></blockquote>
+<blockquote>
+<h2 id="状态保持"><a href="#状态保持" class="headerlink" title="状态保持"></a>状态保持</h2></blockquote>
+<p>http协议是无状态的,下一次去访问一个页面时,并不知道上一次对这个页面做了什么,所以可以使用cookie和session来存储信息</p>
+<blockquote>
+<h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h2></blockquote>
+<p>cookie是由服务器生成,存储在浏览器端的一小段文本信息</p>
+<ul>
+<li><p><strong>cookie的特点</strong></p>
+<ol>
+<li><p>以键值对方式存储</p>
+</li>
+<li><p>通过浏览器访问一个网站时,会将浏览器存储的跟网站相关的所有cookie信息发送给该网站的服务器 (request.COOKIES)</p>
+</li>
+<li><p>cookie是基于域名安全的</p>
+</li>
+<li><p>cookie是有过期时间的,如果不指定,默认关闭浏览器之后cookie就会过期</p>
+</li>
+</ol>
+</li>
+<li><p><strong>cookie设置</strong></p>
+<pre><code>  def set_cookie(request):
+
+      response = render(request,&#39;/books/index.html&#39;)
+
+      response.set_cookie(&#123;&#39;user&#39;:&#39;Kiritsugu&#39;&#125;,max_age=30) # max_age设置cookie过期时间,以秒为单位
+
+      return response</code></pre>
+</li>
+<li><p><strong>cookie获取</strong></p>
+<pre><code>  def get_cookie(request):
+
+      if &#39;user&#39; in request.COOKIES:
+
+          user = request.COOKIES[&#39;user&#39;]
+
+      else:
+
+          user = &#39;&#39;
+
+      render(request,&#39;/books/index.html&#39;,&#123;&#39;user&#39;:user&#125;)</code></pre>
+</li>
+</ul>
+<blockquote>
+<h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2></blockquote>
+<p>session存储在服务器中的数据表中.由服务器生成,并在浏览器中设置一个cookie来标识唯一的session</p>
+<ul>
+<li><p><strong>session的特点</strong></p>
+<ol>
+<li><p>以键值对方式存储</p>
+</li>
+<li><p>session依赖于cookie</p>
+</li>
+<li><p>session也有过期时间,如果不指定,默认两周后过期</p>
+</li>
+</ol>
+</li>
+<li><p><strong>session设置</strong></p>
+<pre><code>  def set_session(request):    
+
+      request.session[&#39;user&#39;:&#39;Kiritsugu&#39;]
+
+      return render(request,&#39;books/index.html&#39;)</code></pre>
+</li>
+<li><p><strong>session获取</strong></p>
+<pre><code>  def get_session(request):
+
+      if &#39;user&#39; in request.session:
+
+          user = request.session[&#39;user&#39;]
+
+      else:
+
+          user = &#39;&#39;
+
+      return render(request,&#39;books/index.html&#39;,&#123;&#39;user&#39;:user&#125;)</code></pre>
+</li>
+<li><p><strong>对象及方法</strong></p>
+<ol>
+<li><p>以键值对的格式写session</p>
+<p> request.session[‘键’]=值</p>
+</li>
+<li><p>根据键读取值</p>
+<p> request.session.get(‘键’,默认值)</p>
+</li>
+<li><p>清除所有session,在存储中删除值的部分</p>
+<p> request.session.clear()</p>
+</li>
+<li><p>清除session数据,在存储中删除session的整条数据</p>
+<p> request.session.flush()</p>
+</li>
+<li><p>删除session中的指定键及值,在存储中只删除某个键键及对应的值</p>
+<p> del request.session[‘键’]</p>
+</li>
+<li><p>设置会话的超时时间,如果没有指定过期时间则两个星期后过期</p>
+<p> request.session.set_expiry(value)</p>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h2 id="cookie和session的应用场景"><a href="#cookie和session的应用场景" class="headerlink" title="cookie和session的应用场景"></a>cookie和session的应用场景</h2></blockquote>
+<p>cookie:记住用户名.安全性要求不高</p>
+<p>session:涉及到安全性要求高的数据.银行卡账户,密码</p>
+<blockquote>
+<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1></blockquote>
+<blockquote>
+<h2 id="模板功能"><a href="#模板功能" class="headerlink" title="模板功能"></a>模板功能</h2></blockquote>
+<p>产生html,控制页面上展示的内容,模板文件不仅仅不是一个html文件</p>
+<p>模板文件包含两个部分:</p>
+<ol>
+<li><p>静态文件:css,js,html</p>
+</li>
+<li><p>动态文件:用于动态去产生一些网页内容,有模板语言来产生</p>
+</li>
+</ol>
+<blockquote>
+<h2 id="模板文件的使用"><a href="#模板文件的使用" class="headerlink" title="模板文件的使用"></a>模板文件的使用</h2></blockquote>
+<p>通常是在视图函数中使用模板产生html内容返回给客户端</p>
+<ol>
+<li><p>加载模板文件 loader.get_template</p>
+<p> 获取模板文件内容,产生一个模板对象</p>
+</li>
+<li><p>定义模板上下文 RequestContext</p>
+<p> 给模板文件传递数据</p>
+</li>
+<li><p>模板渲染产生html页面内容 render</p>
+<p> 用传递的数据替换相应的变量,产生一个替换后的表中html内容</p>
+</li>
+</ol>
+<blockquote>
+<h2 id="模板文件加载顺序"><a href="#模板文件加载顺序" class="headerlink" title="模板文件加载顺序"></a>模板文件加载顺序</h2></blockquote>
+<ol>
+<li><p>首先去配置的模板录下面去找模板文件</p>
+</li>
+<li><p>去INS_APPS下面的每个应用去找模板文件,前提是必须有templates文件夹</p>
+</li>
+</ol>
+<blockquote>
+<h2 id="模板语言"><a href="#模板语言" class="headerlink" title="模板语言"></a>模板语言</h2></blockquote>
+<ul>
+<li><p><strong>模板变量</strong></p>
+<p>  模板变量名室友数字,字母,下划线和点组成的,不能以下划线开头</p>
+<p>  使用模板变量:&#123;{模板变量名}&#125;</p>
+<p>  模板变量的解析顺序:</p>
+<p>  例如:&#123;{book.btitle}&#125;</p>
+<ol>
+<li><p>首先把book当成一个字典,把btitle当成键名,进行取值book[‘btitle’]</p>
+</li>
+<li><p>把book当成一个对象,把btitle当成属性,进行取值book.btitle</p>
+</li>
+<li><p>把book当成一个对象,把btitle当成对象方法,进行取值book.btitle</p>
+</li>
+</ol>
+</li>
+<li><p><strong>模板标签</strong></p>
+<p>  &#123;% 代码段 %&#125;</p>
+<p>  for循环:</p>
+<pre><code>  &#123;% for x in 列表 %&#125;
+
+# 列表不为空时执行
+
+&#123;% empty %&#125;
+
+# 列表为空时执行
+
+&#123;% endfor %&#125;
+
+  可以通过&#123;&#123; forloop.counter &#125;&#125; 得到当前循环的次数</code></pre>
+<p>  if判断:</p>
+<pre><code>  &#123;% if 条件 %&#125;
+
+&#123;% elif 条件 %&#125;
+
+&#123;% else %&#125;
+
+&#123;% endif %&#125;</code></pre>
+<p>  关系比较操作符: &gt;,&lt;,&gt;=,&lt;=,==,!=</p>
+<p>  <em>注意:进行比较操作时,比较操作符两边必须有空格</em></p>
+<p>  逻辑运行符:not,and,or</p>
+</li>
+<li><p><strong>过滤器</strong></p>
+<p>  过滤器用于对模板变量进行操作</p>
+<p>  date:改变日期的显示格式</p>
+<p>  length:求长度(字符串,列表,元组及字典长度)</p>
+<p>  default:设置模板变量的默认值</p>
+<p>  格式: 模板变量 | 过滤器:参数</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Django/" rel="tag"># Django</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/21/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" rel="next" title="我的第一篇博客文章">
+      我的第一篇博客文章 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">虚拟环境的创建和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%BA%94%E7%94%A8%E5%88%9B%E5%BB%BA"><span class="nav-number">1.2.</span> <span class="nav-text">Django项目和应用创建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Django的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB%E8%AE%BE%E8%AE%A1%E5%92%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%94%9F%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">模型类设计和数据表的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%A8%A1%E5%9E%8B%E7%B1%BB%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.2.</span> <span class="nav-text">通过模型类操作数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">Django后台管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E4%BD%BF%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">视图使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E4%BD%BF%E7%94%A8"><span class="nav-number">2.5.</span> <span class="nav-text">模板使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVT%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B"><span class="nav-number">2.6.</span> <span class="nav-text">MVT综合案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Django%E9%85%8D%E7%BD%AEMySQL%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">Django配置MySQL数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">3.2.</span> <span class="nav-text">页面重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%B1%9E%E6%80%A7%E5%92%8C%E9%80%89%E9%A1%B9"><span class="nav-number">3.3.</span> <span class="nav-text">字段属性和选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.4.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%85%B3%E7%B3%BB%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="nav-number">3.5.</span> <span class="nav-text">模型关系及相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E5%99%A8"><span class="nav-number">3.6.</span> <span class="nav-text">管理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%83%E9%80%89%E9%A1%B9"><span class="nav-number">3.7.</span> <span class="nav-text">元选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">视图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E5%8A%9F%E8%83%BD"><span class="nav-number">4.1.</span> <span class="nav-text">视图功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%8F%8Aurl%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">视图函数的使用及url配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E8%A7%86%E5%9B%BE"><span class="nav-number">4.3.</span> <span class="nav-text">错误视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4"><span class="nav-number">4.4.</span> <span class="nav-text">表单提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax%E8%AF%B7%E6%B1%82"><span class="nav-number">4.5.</span> <span class="nav-text">ajax请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie%E4%B8%8Esession"><span class="nav-number">5.</span> <span class="nav-text">cookie与session</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E4%BF%9D%E6%8C%81"><span class="nav-number">5.1.</span> <span class="nav-text">状态保持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie"><span class="nav-number">5.2.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session"><span class="nav-number">5.3.</span> <span class="nav-text">session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie%E5%92%8Csession%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">5.4.</span> <span class="nav-text">cookie和session的应用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF"><span class="nav-number">6.</span> <span class="nav-text">模板</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%8A%9F%E8%83%BD"><span class="nav-number">6.1.</span> <span class="nav-text">模板功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">6.2.</span> <span class="nav-text">模板文件的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F"><span class="nav-number">6.3.</span> <span class="nav-text">模板文件加载顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E8%AF%AD%E8%A8%80"><span class="nav-number">6.4.</span> <span class="nav-text">模板语言</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="emt"
+      src="/images/wennai.jpg">
+  <p class="site-author-name" itemprop="name">emt</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/emt" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;emt" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/278573672" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;278573672" rel="noopener" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">emt</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='1' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
